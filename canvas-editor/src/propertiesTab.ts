@@ -8,16 +8,40 @@ export function updatePropertiesPanel(selectedObject: CanvasObject | null=null) 
     return
   }
 
-  propertiesDiv.innerHTML=`
-    <div class="space-y-2">
-      <div><strong>X:</strong> ${Math.round(selectedObject.x)}</div>
-      <div><strong>Y:</strong> ${Math.round(selectedObject.y)}</div>
-      <div><strong>Width:</strong> ${(selectedObject.width)}</div>
-      <div><strong>Height:</strong> ${(selectedObject.height)}</div>
-      <div class="flex items-center gap-2">
-        <strong> Color:</strong>
-        <div class="w-5 h-5 border" style="background:${selectedObject.color}"></div>
-      </div>
-    </div>
-  `
+  propertiesDiv.replaceChildren()
+
+  const container = document.createElement("div")
+  container.className = "space-y-2"
+
+  const makeRow = (label: string, value: string) => {
+    const row = document.createElement("div")
+
+    const strong = document.createElement("strong")
+    strong.textContent = `${label}: `
+
+    row.appendChild(strong)
+    row.appendChild(document.createTextNode(value))
+
+    return row
+  }
+
+  container.appendChild(makeRow("X", Math.round(selectedObject.x).toString()))
+  container.appendChild(makeRow("Y", Math.round(selectedObject.y).toString()))
+  container.appendChild(makeRow("Width", selectedObject.width.toString()))
+  container.appendChild(makeRow("Height", selectedObject.height.toString()))
+
+  const colorRow = document.createElement("div")
+  colorRow.className = "flex items-center gap-2"
+
+  const colorLabel = document.createElement("strong")
+  colorLabel.textContent = "Color:"
+
+  const colorBox = document.createElement("div")
+  colorBox.className = "w-5 h-5 border"
+  colorBox.style.background = selectedObject.color
+
+  colorRow.appendChild(colorLabel)
+  colorRow.appendChild(colorBox)
+  container.appendChild(colorRow)
+  propertiesDiv.appendChild(container)
 }
