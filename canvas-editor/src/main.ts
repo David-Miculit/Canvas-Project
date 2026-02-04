@@ -53,3 +53,51 @@ canvas.addEventListener("mousedown", (e) => {
   updatePropertiesPanel(selectedObject)
   renderCanvas(objects)
 })
+
+let offsetX = 0
+let offsetY = 0
+let isDragging = false
+canvas.addEventListener("mousedown", (e) => {
+  const rect = canvas.getBoundingClientRect()
+  const mouseX = e.clientX - rect.left
+  const mouseY = e.clientY - rect.top
+
+  selectedObject = null
+
+  for (let i = objects.length - 1; i >= 0; i--) {
+    const obj = objects[i]
+    if (obj.containsPoint(mouseX, mouseY)) {
+      selectedObject = obj
+      offsetX = mouseX - obj.x
+      offsetY = mouseY - obj.y
+      isDragging = true
+      break
+    }
+  }
+
+  for (const obj of objects) {
+    obj.isSelected = obj === selectedObject
+  }
+
+  updatePropertiesPanel(selectedObject)
+  renderCanvas(objects)
+})
+canvas.addEventListener("mousemove", (e) => {
+  if (!isDragging || !selectedObject) return
+
+  const rect = canvas.getBoundingClientRect()
+  const mouseX = e.clientX - rect.left
+  const mouseY = e.clientY - rect.top
+
+  selectedObject.x = mouseX - offsetX
+  selectedObject.y = mouseY - offsetY
+
+  updatePropertiesPanel(selectedObject)
+  renderCanvas(objects)
+})
+canvas.addEventListener("mouseup", () => {
+  isDragging = false
+})
+canvas.addEventListener("mouseleave", () => {
+  isDragging = false
+})
