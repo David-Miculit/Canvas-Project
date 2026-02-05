@@ -1,3 +1,5 @@
+import { Square } from "./squareObject"
+import { Circle } from "./circleObject"
 import { CanvasObject } from "./canvasObject"
 import { clearCanvas, renderCanvas } from "./canvasRenderer"
 import { updatePropertiesPanel } from "./propertiesTab"
@@ -15,7 +17,7 @@ createBtn.addEventListener("click", () => {
     const x = Math.random() * (canvas.width - width);
     const y = Math.random() * (canvas.height - height);
 
-    const obj = new CanvasObject(x,y,width,height,color)
+    const obj = new Circle(x,y,width,height,color)
 
     objects.push(obj)
     renderCanvas(objects)
