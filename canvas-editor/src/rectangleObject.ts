@@ -1,9 +1,9 @@
 import { CanvasObject } from "./canvasObject"
 
-export class Square extends CanvasObject {
+export class Rectangle extends CanvasObject {
     draw(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = this.color
-        ctx.fillRect(this.x, this.y, this.width, this.width)
+        ctx.fillRect(this.x, this.y, this.width, this.height)
         this.drawSelection(ctx)
     }
 

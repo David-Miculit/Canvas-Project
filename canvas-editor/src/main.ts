@@ -1,4 +1,4 @@
-import { Square } from "./squareObject"
+import { Rectangle } from "./rectangleObject"
 import { Circle } from "./circleObject"
 import { CanvasObject } from "./canvasObject"
 import { clearCanvas, renderCanvas } from "./canvasRenderer"
@@ -32,7 +32,7 @@ createSquare.addEventListener("click", () => {
     const x = Math.random() * (canvas.width - width);
     const y = Math.random() * (canvas.height - height);
 
-    const obj = new Square(x,y,width,height,color)
+    const obj = new Rectangle(x,y,width,height,color)
 
     objects.push(obj)
     renderCanvas(objects)
