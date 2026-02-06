@@ -16,12 +16,5 @@ export abstract class CanvasObject {
 
     abstract draw(ctx: CanvasRenderingContext2D): void
     abstract containsPoint(px: number, py: number): boolean
-
-    protected drawSelection(ctx: CanvasRenderingContext2D) {
-        if (this.isSelected) {
-            ctx.strokeStyle = "black"
-            ctx.lineWidth = 2
-            ctx.strokeRect(this.x, this.y, this.width, this.height)
-        }
-    }
+    abstract drawSelection(ctx: CanvasRenderingContext2D): void
 }
