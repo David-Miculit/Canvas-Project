@@ -8,8 +8,8 @@ const canvas=document.getElementById("canvas") as HTMLCanvasElement
 let objects: CanvasObject[] = []
 let selectedObject: CanvasObject | null
 
-const createBtn = document.getElementById("createBtn") as HTMLInputElement
-createBtn.addEventListener("click", () => {
+const createCircle = document.getElementById("createCircle") as HTMLInputElement
+createCircle.addEventListener("click", () => {
     const width = Number(widthInput.value)
     const height = Number(heightInput.value)
     const color = colorInput.value
@@ -18,6 +18,21 @@ createBtn.addEventListener("click", () => {
     const y = Math.random() * (canvas.height - height);
 
     const obj = new Circle(x,y,width,height,color)
+
+    objects.push(obj)
+    renderCanvas(objects)
+})
+
+const createSquare = document.getElementById("createSquare") as HTMLInputElement
+createSquare.addEventListener("click", () => {
+    const width = Number(widthInput.value)
+    const height = Number(heightInput.value)
+    const color = colorInput.value
+
+    const x = Math.random() * (canvas.width - width);
+    const y = Math.random() * (canvas.height - height);
+
+    const obj = new Square(x,y,width,height,color)
 
     objects.push(obj)
     renderCanvas(objects)
